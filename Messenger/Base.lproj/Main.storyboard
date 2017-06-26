@@ -64,11 +64,69 @@
                     <connections>
                         <outlet property="passwordLabel" destination="JBJ-g4-I5m" id="erE-2x-OeE"/>
                         <outlet property="usernameLabel" destination="Pao-xO-4E8" id="C6L-na-UWZ"/>
+                        <segue destination="I9F-8O-PSa" kind="presentation" identifier="loginSegue" id="v3M-rX-uZO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="127.28635682158921"/>
+        </scene>
+        <!--Chat-->
+        <scene sceneID="l0D-oa-xyE">
+            <objects>
+                <viewController id="kU3-Da-lCO" customClass="ChatViewController" customModule="Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uOq-O4-Gjh"/>
+                        <viewControllerLayoutGuide type="bottom" id="xoA-eQ-McF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qPm-iD-LIE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type a Message..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hJW-7m-8DR">
+                                <rect key="frame" x="30" y="107" width="204" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tfC-fF-u8b">
+                                <rect key="frame" x="296" y="107" width="36" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Send"/>
+                                <connections>
+                                    <action selector="didTapSend:" destination="kU3-Da-lCO" eventType="touchUpInside" id="bve-b0-cst"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Chat" id="A87-1u-ebP"/>
+                    <connections>
+                        <outlet property="chatMessageField" destination="hJW-7m-8DR" id="a9Q-zB-QwD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pf0-W2-8tj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1965.5999999999999" y="126.38680659670166"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="beW-G6-HdS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="I9F-8O-PSa" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XSr-0G-ZdH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kU3-Da-lCO" kind="relationship" relationship="rootViewController" id="SKX-gH-F5v"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jyU-by-v05" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1090" y="126"/>
         </scene>
     </scenes>
 </document>
