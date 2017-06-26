@@ -9,15 +9,24 @@
 import UIKit
 import Parse
 
-class ChatViewController: UIViewController {
-    
+class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var chatMessageField: UITextField!
     
-
+    @IBOutlet weak var tableView: UITableView!
+    
+    var posts: [PFObject]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.refresh()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.refresh), userInfo: nil, repeats: true)
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,7 +35,7 @@ class ChatViewController: UIViewController {
     }
     
     @IBAction func didTapSend(_ sender: Any) {
-        let chatMessage = PFObject(className: "Message_fbuJuly2017")
+        let chatMessage = PFObject(className: "Message_fbu2017")
         chatMessage["text"] = chatMessageField.text ?? ""
         chatMessage.saveInBackground { (success, error) in
             if success {
@@ -37,6 +46,40 @@ class ChatViewController: UIViewController {
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let posts = self.posts {
+            return posts.count
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatCell", for: indexPath) as! ChatCell
+        let post = self.posts![indexPath.row]
+        cell.chatLabel.text = post["text"] as! String
+        print ("\(post["text"]) it should be working")
+        
+        return cell
+    }
+    
+    func refresh() {
+        var query = PFQuery(className: "Message_fbu2017")
+        query.addDescendingOrder("createdAt")
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts {
+                // do something with the array of object returned by the call
+                self.posts = posts
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
+        tableView.reloadData()
+    }
+    
+    
 
     /*
     // MARK: - Navigation
