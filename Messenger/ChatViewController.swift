@@ -25,6 +25,10 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        // Provide an estimated row height. Used for calculating scroll indicator
+        tableView.estimatedRowHeight = 50
+        
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.refresh), userInfo: nil, repeats: true)
         tableView.reloadData()
     }

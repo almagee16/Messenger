@@ -110,14 +110,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="94.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGm-Yj-Osn">
-                                                    <rect key="frame" x="18" y="11" width="349" height="76"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WGm-Yj-Osn">
+                                                    <rect key="frame" x="8" y="8" width="359" height="79"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="WGm-Yj-Osn" firstAttribute="leading" secondItem="AbQ-sN-Bzy" secondAttribute="leading" constant="8" id="32A-do-Zct"/>
+                                                <constraint firstItem="WGm-Yj-Osn" firstAttribute="top" secondItem="AbQ-sN-Bzy" secondAttribute="top" constant="8" id="IgF-zN-Kwe"/>
+                                                <constraint firstAttribute="bottom" secondItem="WGm-Yj-Osn" secondAttribute="bottom" constant="8" id="mYr-hk-zLP"/>
+                                                <constraint firstAttribute="trailing" secondItem="WGm-Yj-Osn" secondAttribute="trailing" constant="8" id="tQ7-6X-oby"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="chatLabel" destination="WGm-Yj-Osn" id="Gw3-6a-UMD"/>
