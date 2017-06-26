@@ -75,7 +75,7 @@
         <!--Chat-->
         <scene sceneID="l0D-oa-xyE">
             <objects>
-                <viewController id="kU3-Da-lCO" customClass="ChatViewController" customModule="Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" id="kU3-Da-lCO" customClass="ChatViewController" customModule="Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uOq-O4-Gjh"/>
                         <viewControllerLayoutGuide type="bottom" id="xoA-eQ-McF"/>
