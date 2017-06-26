@@ -19,6 +19,8 @@ class LoginViewController: UIViewController {
     
     let invalidUserName = UIAlertController(title: "Invalid Username", message: "This username already exists. Please choose another username", preferredStyle: .alert)
     
+    let invalidLoginCredentials = UIAlertController(title: "Invalid Login Credentials", message: "Please ensure that you are using the correct username and password and try again", preferredStyle: .alert)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,7 @@ class LoginViewController: UIViewController {
         }
         alertController.addAction(OKAction)
         invalidUserName.addAction(OKAction)
+        invalidLoginCredentials.addAction(OKAction)
         // Do any additional setup after loading the view.
     }
 
@@ -87,7 +90,14 @@ class LoginViewController: UIViewController {
         
         PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) in
             if let error = error {
-                print("User log in failed: \(error.localizedDescription)")
+                let errorInfo = error._userInfo as! [String: Any]
+                let code = errorInfo["code"] as! Int
+                if code == 101 {
+                    self.present(self.invalidLoginCredentials, animated: true) {
+                        
+                    }
+                }
+                
             } else {
                 print("User logged in successfully")
                 // display view controller that needs to shown after successful login
