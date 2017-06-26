@@ -41,6 +41,7 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func didTapSend(_ sender: Any) {
         let chatMessage = PFObject(className: "Message_fbu2017")
         chatMessage["text"] = chatMessageField.text ?? ""
+        chatMessage["user"] = PFUser.current()
         chatMessage.saveInBackground { (success, error) in
             if success {
                 print("The message was saved!")
@@ -66,11 +67,20 @@ class ChatViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.chatLabel.text = post["text"] as! String
         print ("\(post["text"]) it should be working")
         
+        if let user = post["user"] as? PFUser {
+            // User found! update username label with username
+            cell.usernameLabel.text = user.username
+        } else {
+            // No user found, set default username
+            cell.usernameLabel.text = "🤖, no default username"
+        }
+        
         return cell
     }
     
     func refresh() {
         var query = PFQuery(className: "Message_fbu2017")
+        query.includeKey("user")
         query.addDescendingOrder("createdAt")
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts {
