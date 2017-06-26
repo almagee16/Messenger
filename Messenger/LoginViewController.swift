@@ -17,6 +17,9 @@ class LoginViewController: UIViewController {
     
     let alertController = UIAlertController(title: "Empty inputs", message: "Please provide both a username and a password", preferredStyle: .alert)
     
+    let invalidUserName = UIAlertController(title: "Invalid Username", message: "This username already exists. Please choose another username", preferredStyle: .alert)
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,6 +27,7 @@ class LoginViewController: UIViewController {
             // handle response here.
         }
         alertController.addAction(OKAction)
+        invalidUserName.addAction(OKAction)
         // Do any additional setup after loading the view.
     }
 
@@ -40,7 +44,7 @@ class LoginViewController: UIViewController {
         
         if username.isEmpty || password.isEmpty
         {
-            present(alertController, animated: true) {
+            present(self.alertController, animated: true) {
                 
             }
             
@@ -54,7 +58,13 @@ class LoginViewController: UIViewController {
         newUser.signUpInBackground { (Bool, error: Error?) in
             
             if let error = error {
-                print(error.localizedDescription)
+                let errorInfo = error._userInfo as! [String: Any]
+                let code = errorInfo["code"] as! Int
+                if code == 202 {
+                    self.present(self.invalidUserName, animated: true) {
+                        
+                    }
+                }
             } else {
                 print("User Registered successfully")
                 // manually segue to logged in view
@@ -70,7 +80,7 @@ class LoginViewController: UIViewController {
         let password = passwordLabel.text ?? ""
         
         if username.isEmpty || password.isEmpty {
-            present(alertController, animated: true) {
+            present(self.alertController, animated: true) {
                 
             }
         } else {
